@@ -131,6 +131,7 @@
 
   img, svg { display: block; }
   a { color: var(--color-primary); }
+  button { touch-action: manipulation; }
 
   /* Reduce motion for users who ask for it */
   @media (prefers-reduced-motion: reduce) {
@@ -155,7 +156,7 @@
   }
 
   /* ============================================================
-     HEADER
+     HEADER (hero)
      ============================================================ */
   .site-header {
     border-bottom: 1px solid var(--color-border);
@@ -166,7 +167,8 @@
     align-items: flex-start;
     justify-content: space-between;
     gap: var(--space-4);
-    padding: var(--space-6) var(--space-5) var(--space-5);
+    padding-top: var(--space-6);
+    padding-bottom: var(--space-3);
   }
   .header-titles h1 {
     margin: 0 0 var(--space-2);
@@ -174,12 +176,17 @@
     font-weight: 700;
     letter-spacing: -0.02em;
   }
+  .value-prop {
+    margin: 0 0 var(--space-2);
+    color: var(--color-text-secondary);
+    font-size: var(--fs-base);
+    line-height: 1.5;
+    max-width: 62ch;
+  }
   .subtitle {
     margin: 0;
-    color: var(--color-text-secondary);
+    color: var(--color-text-tertiary);
     font-size: var(--fs-sm);
-    line-height: 1.6;
-    max-width: 68ch;
   }
 
   .btn-icon {
@@ -205,8 +212,16 @@
   }
   .btn-icon svg { width: 20px; height: 20px; }
 
+  /* Stat pills: category counts that double as filters */
+  .stat-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding-bottom: var(--space-5);
+  }
+
   .intro {
-    padding: var(--space-5) 0 var(--space-1);
+    padding: var(--space-4) 0 var(--space-1);
   }
   .intro p {
     margin: 0;
@@ -266,16 +281,11 @@
   .search-box input::placeholder { color: var(--color-text-tertiary); }
   .search-box input:focus-visible { outline-offset: 0; }
 
-  .chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-  }
   .chip-filter {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    height: 36px;
+    height: 40px;
     padding: 0 var(--space-3);
     border-radius: var(--radius-pill);
     border: 1px solid var(--color-border);
@@ -298,6 +308,22 @@
     border-color: var(--color-primary);
     color: var(--color-primary-contrast);
   }
+  .chip-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex: 0 0 auto;
+  }
+  .chip-filter.cat-1 .chip-dot { background: var(--cat-1-text); }
+  .chip-filter.cat-2 .chip-dot { background: var(--cat-2-text); }
+  .chip-filter.cat-3 .chip-dot { background: var(--cat-3-text); }
+  .chip-filter.cat-4 .chip-dot { background: var(--cat-4-text); }
+  .chip-filter.cat-x .chip-dot { background: var(--cat-x-text); }
+  .chip-filter.cat-1.active { background: var(--cat-1-bg); border-color: var(--cat-1-text); color: var(--cat-1-text); }
+  .chip-filter.cat-2.active { background: var(--cat-2-bg); border-color: var(--cat-2-text); color: var(--cat-2-text); }
+  .chip-filter.cat-3.active { background: var(--cat-3-bg); border-color: var(--cat-3-text); color: var(--cat-3-text); }
+  .chip-filter.cat-4.active { background: var(--cat-4-bg); border-color: var(--cat-4-text); color: var(--cat-4-text); }
+  .chip-filter.cat-x.active { background: var(--cat-x-bg); border-color: var(--cat-x-text); color: var(--cat-x-text); }
   .chip-count {
     font-variant-numeric: tabular-nums;
     opacity: 0.85;
@@ -308,7 +334,7 @@
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
-    height: 36px;
+    height: 40px;
     padding: 0 var(--space-3);
     border-radius: var(--radius-pill);
     border: 1px solid var(--color-border);
@@ -355,9 +381,12 @@
     gap: var(--space-2);
     align-items: flex-start;
     width: 100%;
+    height: 100%;
+    min-height: 190px;
     text-align: left;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-border);
     border-radius: var(--radius-lg);
     padding: var(--space-4);
     font-family: inherit;
@@ -367,11 +396,21 @@
                 box-shadow var(--duration-fast) var(--easing-out),
                 border-color var(--duration-fast) var(--easing-out);
   }
+  .card.cat-1 { border-left-color: var(--cat-1-text); }
+  .card.cat-2 { border-left-color: var(--cat-2-text); }
+  .card.cat-3 { border-left-color: var(--cat-3-text); }
+  .card.cat-4 { border-left-color: var(--cat-4-text); }
+  .card.cat-x { border-left-color: var(--cat-x-text); }
   .card:hover {
     border-color: var(--color-primary);
     box-shadow: 0 8px 24px hsl(var(--shadow-color) / 0.10);
     transform: translateY(-2px);
   }
+  .card.cat-1:hover { border-left-color: var(--cat-1-text); }
+  .card.cat-2:hover { border-left-color: var(--cat-2-text); }
+  .card.cat-3:hover { border-left-color: var(--cat-3-text); }
+  .card.cat-4:hover { border-left-color: var(--cat-4-text); }
+  .card.cat-x:hover { border-left-color: var(--cat-x-text); }
   .card:active { transform: translateY(0); }
 
   .card-top {
@@ -383,9 +422,9 @@
   }
   .card-id {
     font-family: var(--font-mono);
-    font-size: var(--fs-sm);
+    font-size: var(--fs-base);
     color: var(--color-text);
-    font-weight: 600;
+    font-weight: 700;
     overflow-wrap: anywhere;
   }
   .script-badge {
@@ -453,6 +492,20 @@
     font-size: var(--fs-sm);
     padding: var(--space-7) var(--space-4);
   }
+  .empty-state p { margin: 0; }
+  .btn-reset {
+    margin-top: var(--space-3);
+    height: 40px;
+    padding: 0 var(--space-4);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: var(--fs-sm);
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .btn-reset:hover { background: var(--color-surface-hover); border-color: var(--color-border-strong); }
 
   /* ============================================================
      MODAL
@@ -479,12 +532,18 @@
     max-height: min(85vh, 920px);
     overflow-y: auto;
     background: var(--color-surface-raised);
+    border-top: 4px solid transparent;
     border-radius: var(--radius-lg);
     padding: var(--space-6);
     box-shadow: 0 24px 64px hsl(var(--shadow-color) / 0.35);
     transform: translateY(10px) scale(0.98);
     transition: transform var(--duration-base) var(--easing-out);
   }
+  .modal.cat-1 { border-top-color: var(--cat-1-text); }
+  .modal.cat-2 { border-top-color: var(--cat-2-text); }
+  .modal.cat-3 { border-top-color: var(--cat-3-text); }
+  .modal.cat-4 { border-top-color: var(--cat-4-text); }
+  .modal.cat-x { border-top-color: var(--cat-x-text); }
   .modal-backdrop.open .modal { transform: translateY(0) scale(1); }
 
   .modal-close {
@@ -493,8 +552,8 @@
     top: 0;
     margin-left: var(--space-3);
     margin-bottom: var(--space-3);
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: var(--radius-md);
     border: 1px solid var(--color-border);
     background: var(--color-surface);
@@ -522,9 +581,18 @@
 
   .modal-section { margin-bottom: var(--space-5); }
   .modal-section h3 {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
     margin: 0 0 var(--space-2);
     font-size: var(--fs-base);
     font-weight: 700;
+  }
+  .modal-section h3 svg {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 auto;
+    color: var(--color-text-tertiary);
   }
   .modal-section p {
     margin: 0;
@@ -533,8 +601,14 @@
     color: var(--color-text-secondary);
   }
 
+  .table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .command-table {
     width: 100%;
+    min-width: 380px;
     border-collapse: collapse;
     font-size: var(--fs-sm);
   }
@@ -564,8 +638,28 @@
   }
   .command-table td:last-child { text-align: right; width: 1%; }
 
+  @media (max-width: 480px) {
+    .command-table thead { display: none; }
+    .command-table, .command-table tbody, .command-table tr, .command-table td { display: block; width: 100%; }
+    .command-table tr { padding: var(--space-2) 0; }
+    .command-table td { border-bottom: none; padding: 2px 0; }
+    .command-table td[data-label]::before {
+      content: attr(data-label);
+      display: block;
+      font-size: var(--fs-xs);
+      color: var(--color-text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 2px;
+    }
+    .command-table td:last-child { text-align: left; width: auto; padding-top: var(--space-2); }
+  }
+
   .copy-btn {
-    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 36px;
     padding: 0 var(--space-3);
     border-radius: var(--radius-sm);
     border: 1px solid var(--color-border);
@@ -575,10 +669,14 @@
     font-family: inherit;
     cursor: pointer;
     white-space: nowrap;
-    transition: background var(--duration-fast) var(--easing-out), color var(--duration-fast) var(--easing-out);
+    transition: background var(--duration-fast) var(--easing-out), color var(--duration-fast) var(--easing-out), border-color var(--duration-fast) var(--easing-out);
   }
+  .copy-btn svg { width: 14px; height: 14px; flex: 0 0 auto; }
+  .copy-btn .icon-check { display: none; }
   .copy-btn:hover { background: var(--color-surface-hover); color: var(--color-text); }
   .copy-btn.copied { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-primary-contrast); }
+  .copy-btn.copied .icon-copy { display: none; }
+  .copy-btn.copied .icon-check { display: block; }
 
   .hint-text {
     margin: var(--space-2) 0 0;
@@ -617,16 +715,51 @@
   .chip-muted { color: var(--color-text-tertiary); font-family: var(--font-sans); }
 
   .original-desc summary {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
     cursor: pointer;
     font-size: var(--fs-sm);
     font-weight: 600;
     color: var(--color-primary);
     padding: var(--space-2) 0;
   }
+  .original-desc summary svg { width: 16px; height: 16px; flex: 0 0 auto; }
   .original-desc p {
     margin-top: var(--space-2);
     white-space: pre-wrap;
   }
+
+  /* ============================================================
+     BACK TO TOP
+     ============================================================ */
+  .back-to-top {
+    position: fixed;
+    right: var(--space-5);
+    bottom: var(--space-5);
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text-secondary);
+    box-shadow: 0 8px 24px hsl(var(--shadow-color) / 0.18);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 60;
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+    transition: opacity var(--duration-base) var(--easing-out),
+                transform var(--duration-base) var(--easing-out),
+                background var(--duration-fast) var(--easing-out),
+                color var(--duration-fast) var(--easing-out);
+  }
+  .back-to-top svg { width: 20px; height: 20px; }
+  .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .back-to-top:hover { background: var(--color-surface-hover); color: var(--color-text); }
 
   /* ============================================================
      FOOTER
@@ -644,28 +777,29 @@
 </style>
 
 <header class="site-header">
-  <div class="wrap header-inner">
-    <div class="header-titles">
-      <h1>Kho AI Skills</h1>
-      <p class="subtitle" id="subtitle">Đang tải dữ liệu…</p>
+  <div class="wrap">
+    <div class="header-inner">
+      <div class="header-titles">
+        <h1>Kho AI Skills</h1>
+        <p class="value-prop">Tra nhanh skill nào đang có trong kho, dùng lúc nào, và gọi bằng lệnh gì. Bấm vào thẻ để xem chi tiết và copy lệnh gọi.</p>
+        <p class="subtitle" id="subtitle" aria-live="polite">Đang tải dữ liệu…</p>
+      </div>
+      <button type="button" class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện sáng / tối" title="Chuyển giao diện sáng / tối">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+        </svg>
+      </button>
     </div>
-    <button type="button" class="btn-icon" id="themeToggle" aria-label="Chuyển giao diện sáng / tối" title="Chuyển giao diện sáng / tối">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="12" cy="12" r="4"></circle>
-        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
-      </svg>
-    </button>
+    <div class="stat-pills" id="categoryChips" role="group" aria-label="Lọc theo nhóm skill"></div>
   </div>
 </header>
 
 <div class="wrap">
   <section class="intro">
     <p>
-      Trang này để tra cứu nhanh toàn bộ AI skill đang có trong bộ này: skill nào đang tồn tại,
-      lúc nào nên dùng, và gọi bằng lệnh gì. Gõ từ khóa hoặc lọc theo nhóm để tìm skill phù hợp,
-      bấm vào thẻ để xem chi tiết cách gọi và copy lệnh. Riêng nhóm AgentKit: trong Claude Code
-      gọi bằng <code>/ak:xxx</code>, còn runtime khác (Codex, Gemini CLI...) dùng bản universal
-      <code>ak-xxx</code>.
+      Riêng nhóm AgentKit: trong Claude Code gọi bằng <code>/ak:xxx</code>, còn runtime khác
+      (Codex, Gemini CLI...) dùng bản universal <code>ak-xxx</code>.
     </p>
   </section>
 
@@ -676,9 +810,8 @@
           <circle cx="11" cy="11" r="7"></circle>
           <path d="m21 21-4.3-4.3"></path>
         </svg>
-        <input type="search" id="searchInput" aria-label="Tìm kiếm skill theo tên, mô tả hoặc câu lệnh" placeholder="Tìm theo tên, mô tả, câu lệnh…">
+        <input type="search" id="searchInput" aria-label="Tìm kiếm skill theo tên, mô tả hoặc câu lệnh" placeholder="Tìm theo tên, mô tả, câu lệnh… (nhấn /)">
       </div>
-      <div class="chips" id="categoryChips" role="group" aria-label="Lọc theo nhóm skill"></div>
       <label class="toggle-scripts" for="scriptsOnly">
         <input type="checkbox" id="scriptsOnly">
         <span>Chỉ skill có scripts</span>
@@ -689,7 +822,10 @@
 
   <main>
     <div class="grid" id="grid" aria-live="polite"></div>
-    <p class="empty-state" id="emptyState" hidden>Không tìm thấy skill nào khớp. Thử từ khóa khác hoặc bỏ bớt bộ lọc.</p>
+    <div class="empty-state" id="emptyState" hidden>
+      <p>Không tìm thấy skill nào khớp. Thử từ khóa khác hoặc bỏ bớt bộ lọc.</p>
+      <button type="button" class="btn-reset" id="resetFiltersBtn">Xóa bộ lọc</button>
+    </div>
   </main>
 </div>
 
@@ -699,6 +835,13 @@
     <div id="modalBody"></div>
   </div>
 </div>
+
+<button type="button" class="back-to-top" id="backToTop" aria-label="Lên đầu trang">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <line x1="12" y1="19" x2="12" y2="5"></line>
+    <polyline points="5 12 12 5 19 12"></polyline>
+  </svg>
+</button>
 
 <footer class="site-footer">
   <div class="wrap">
@@ -741,6 +884,15 @@
     "là các file references/scripts đi kèm, chỉ đọc khi tác vụ thật sự cần đến. Nhờ cơ chế " +
     "này, hệ thống có thể chứa hàng trăm skill mà không tốn context của những skill chưa dùng tới.";
 
+  /* Small inline icons used as section markers in the detail modal.
+     Kept as plain SVG strings (no external icon font/CDN). */
+  const ICON_INFO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="12" y1="11" x2="12" y2="16"></line><circle cx="12" cy="8" r="0.6" fill="currentColor" stroke="none"></circle></svg>';
+  const ICON_TARGET = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"></circle></svg>';
+  const ICON_TERMINAL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><polyline points="7 9 10 12 7 15"></polyline><line x1="12" y1="15" x2="16" y2="15"></line></svg>';
+  const ICON_CHAT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>';
+  const ICON_CPU = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="2" x2="9" y2="4"></line><line x1="15" y1="2" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="22"></line><line x1="15" y1="20" x2="15" y2="22"></line><line x1="2" y1="9" x2="4" y2="9"></line><line x1="2" y1="15" x2="4" y2="15"></line><line x1="20" y1="9" x2="22" y2="9"></line><line x1="20" y1="15" x2="22" y2="15"></line></svg>';
+  const ICON_FILE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>';
+
   /* ============================================================
      DOM REFS
      ============================================================ */
@@ -751,11 +903,13 @@
   const resultCountEl = document.getElementById("resultCount");
   const gridEl = document.getElementById("grid");
   const emptyStateEl = document.getElementById("emptyState");
+  const resetFiltersBtn = document.getElementById("resetFiltersBtn");
   const modalBackdrop = document.getElementById("modalBackdrop");
   const modalEl = document.getElementById("modal");
   const modalClose = document.getElementById("modalClose");
   const modalBody = document.getElementById("modalBody");
   const themeToggle = document.getElementById("themeToggle");
+  const backToTopEl = document.getElementById("backToTop");
 
   /* ============================================================
      STATE
@@ -821,40 +975,46 @@
      RENDER: HEADER SUBTITLE
      ============================================================ */
   function renderHeader() {
-    const counts = {};
-    SKILLS.forEach(function (s) { counts[s.category] = (counts[s.category] || 0) + 1; });
-    const cats = getAllCategories(SKILLS);
-    const parts = cats.map(function (c) { return c + ": " + (counts[c] || 0); });
     subtitleEl.textContent = SKILLS.length
-      ? "Tổng " + SKILLS.length + " skill  •  " + parts.join("  •  ")
+      ? "Tổng " + SKILLS.length + " skill trong kho."
       : "Chưa có dữ liệu skill.";
   }
 
   /* ============================================================
-     RENDER: CATEGORY CHIPS
+     RENDER: CATEGORY STAT PILLS (also act as filters)
      ============================================================ */
   function renderCategoryChips() {
     const counts = {};
     SKILLS.forEach(function (s) { counts[s.category] = (counts[s.category] || 0) + 1; });
     const cats = getAllCategories(SKILLS);
 
-    let html = '<button type="button" class="chip-filter active" data-cat="all">' +
-      'Tất cả <span class="chip-count">' + SKILLS.length + '</span></button>';
+    let html = '<button type="button" class="chip-filter cat-all active" data-cat="all" aria-pressed="true">' +
+      '<span class="chip-label">Tất cả</span><span class="chip-count">' + SKILLS.length + '</span></button>';
 
     cats.forEach(function (c) {
-      html += '<button type="button" class="chip-filter" data-cat="' + escapeHtml(c) + '">' +
-        escapeHtml(c) + ' <span class="chip-count">' + (counts[c] || 0) + '</span></button>';
+      const cls = getCategoryClass(c);
+      html += '<button type="button" class="chip-filter ' + cls + '" data-cat="' + escapeHtml(c) + '" aria-pressed="false">' +
+        '<span class="chip-dot" aria-hidden="true"></span><span class="chip-label">' + escapeHtml(c) + '</span>' +
+        '<span class="chip-count">' + (counts[c] || 0) + '</span></button>';
     });
 
     categoryChipsEl.innerHTML = html;
+  }
+
+  function setActiveChip(btn) {
+    const buttons = categoryChipsEl.querySelectorAll(".chip-filter");
+    buttons.forEach(function (b) {
+      const isActive = b === btn;
+      b.classList.toggle("active", isActive);
+      b.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
   }
 
   categoryChipsEl.addEventListener("click", function (e) {
     const btn = e.target.closest(".chip-filter");
     if (!btn) return;
     state.category = btn.dataset.cat;
-    const buttons = categoryChipsEl.querySelectorAll(".chip-filter");
-    buttons.forEach(function (b) { b.classList.toggle("active", b === btn); });
+    setActiveChip(btn);
     applyFilters();
   });
 
@@ -862,6 +1022,7 @@
      RENDER: CARD GRID
      ============================================================ */
   function cardHtml(s) {
+    const catClass = getCategoryClass(s.category);
     const triggers = Array.isArray(s.triggerExamples) ? s.triggerExamples.slice(0, 2) : [];
     const triggersHtml = triggers.length
       ? '<div class="card-triggers">' + triggers.map(function (t) {
@@ -875,12 +1036,12 @@
       : "";
 
     return (
-      '<button type="button" class="card" data-id="' + escapeHtml(s.id) + '" aria-haspopup="dialog">' +
+      '<button type="button" class="card ' + catClass + '" data-id="' + escapeHtml(s.id) + '" aria-haspopup="dialog" aria-label="Xem chi tiết skill ' + escapeHtml(s.id) + '">' +
         '<div class="card-top">' +
           '<code class="card-id">' + escapeHtml(s.id) + '</code>' +
           scriptBadge +
         '</div>' +
-        '<span class="badge ' + getCategoryClass(s.category) + '">' + escapeHtml(s.category) + '</span>' +
+        '<span class="badge ' + catClass + '">' + escapeHtml(s.category) + '</span>' +
         '<p class="card-summary">' + escapeHtml(s.summaryVi) + '</p>' +
         triggersHtml +
       '</button>'
@@ -931,12 +1092,31 @@
     applyFilters();
   });
 
+  function resetFilters() {
+    clearTimeout(searchDebounceTimer);
+    state.query = "";
+    state.category = "all";
+    state.scriptsOnly = false;
+    searchInput.value = "";
+    scriptsOnlyEl.checked = false;
+    const allBtn = categoryChipsEl.querySelector('.chip-filter[data-cat="all"]');
+    if (allBtn) setActiveChip(allBtn);
+    applyFilters();
+    searchInput.focus();
+  }
+
+  if (resetFiltersBtn) resetFiltersBtn.addEventListener("click", resetFilters);
+
   /* ============================================================
      MODAL (detail view)
      ============================================================ */
   function copyBtnHtml(text) {
     const safe = escapeHtml(text);
-    return '<button type="button" class="copy-btn" data-copy="' + safe + '" aria-label="Chép lệnh ' + safe + '">Chép</button>';
+    return '<button type="button" class="copy-btn" data-copy="' + safe + '" aria-label="Chép lệnh ' + safe + '">' +
+      '<svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>' +
+      '<svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>' +
+      '<span class="copy-label">Chép</span>' +
+    '</button>';
   }
 
   function buildModalHtml(s) {
@@ -965,35 +1145,37 @@
       '</div>' +
 
       '<section class="modal-section">' +
-        '<h3>Chức năng</h3>' +
+        '<h3>' + ICON_INFO + '<span>Chức năng</span></h3>' +
         '<p>' + escapeHtml(s.summaryVi) + '</p>' +
       '</section>' +
 
       '<section class="modal-section">' +
-        '<h3>Khi nào dùng</h3>' +
+        '<h3>' + ICON_TARGET + '<span>Khi nào dùng</span></h3>' +
         '<p>' + escapeHtml(useWhen) + '</p>' +
       '</section>' +
 
       '<section class="modal-section">' +
-        '<h3>Cách gọi</h3>' +
+        '<h3>' + ICON_TERMINAL + '<span>Cách gọi</span></h3>' +
+        '<div class="table-scroll">' +
         '<table class="command-table">' +
           '<thead><tr><th scope="col">Nền tảng</th><th scope="col">Lệnh gọi</th><th scope="col"></th></tr></thead>' +
           '<tbody>' +
-            '<tr><th scope="row">Claude Code</th><td><code>' + escapeHtml(s.claudeCommand) + '</code></td><td>' + copyBtnHtml(s.claudeCommand) + '</td></tr>' +
-            '<tr><th scope="row">Codex</th><td><code>' + escapeHtml(s.codexCommand) + '</code></td><td>' + copyBtnHtml(s.codexCommand) + '</td></tr>' +
-            '<tr><th scope="row">Gemini CLI / Deep Code</th><td><code>' + escapeHtml(geminiCmd) + '</code></td><td>' + copyBtnHtml(geminiCmd) + '</td></tr>' +
+            '<tr><th scope="row">Claude Code</th><td data-label="Lệnh gọi"><code>' + escapeHtml(s.claudeCommand) + '</code></td><td>' + copyBtnHtml(s.claudeCommand) + '</td></tr>' +
+            '<tr><th scope="row">Codex</th><td data-label="Lệnh gọi"><code>' + escapeHtml(s.codexCommand) + '</code></td><td>' + copyBtnHtml(s.codexCommand) + '</td></tr>' +
+            '<tr><th scope="row">Gemini CLI / Deep Code</th><td data-label="Lệnh gọi"><code>' + escapeHtml(geminiCmd) + '</code></td><td>' + copyBtnHtml(geminiCmd) + '</td></tr>' +
           '</tbody>' +
         '</table>' +
+        '</div>' +
         '<p class="hint-text">Hoặc chỉ cần mô tả việc cần làm — skill tự kích hoạt.</p>' +
       '</section>' +
 
       '<section class="modal-section">' +
-        '<h3>Ví dụ câu gọi</h3>' +
+        '<h3>' + ICON_CHAT + '<span>Ví dụ câu gọi</span></h3>' +
         '<div class="example-chips">' + examplesHtml + '</div>' +
       '</section>' +
 
       '<section class="modal-section">' +
-        '<h3>Cơ chế</h3>' +
+        '<h3>' + ICON_CPU + '<span>Cơ chế</span></h3>' +
         '<p>' + escapeHtml(MECHANISM_TEXT) + '</p>' +
         '<div class="resource-chips">' + resourceHtml + '</div>' +
         (s.hasScripts ? '<p class="hint-text hint-scripts">Skill này có scripts thực thi được, không chỉ tài liệu.</p>' : '') +
@@ -1001,7 +1183,7 @@
 
       '<section class="modal-section">' +
         '<details class="original-desc">' +
-          '<summary>Xem mô tả gốc (trigger chuẩn)</summary>' +
+          '<summary>' + ICON_FILE + '<span>Xem mô tả gốc (trigger chuẩn)</span></summary>' +
           '<p>' + escapeHtml(s.descriptionOriginal) + '</p>' +
         '</details>' +
       '</section>'
@@ -1013,6 +1195,7 @@
     if (!s) return;
     lastFocusedEl = document.activeElement;
     modalBody.innerHTML = buildModalHtml(s);
+    modalEl.className = "modal " + getCategoryClass(s.category);
     modalBackdrop.hidden = false;
     document.body.style.overflow = "hidden";
     requestAnimationFrame(function () { modalBackdrop.classList.add("open"); });
@@ -1049,8 +1232,34 @@
     if (e.target === modalBackdrop) closeModal();
   });
 
+  /* ============================================================
+     KEYBOARD SHORTCUTS
+     "/" focuses search (unless already typing somewhere).
+     Escape closes the modal if open, else clears a focused search box.
+     ============================================================ */
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && !modalBackdrop.hidden) closeModal();
+    if (e.key === "Escape") {
+      if (!modalBackdrop.hidden) {
+        closeModal();
+        return;
+      }
+      if (document.activeElement === searchInput && searchInput.value) {
+        clearTimeout(searchDebounceTimer);
+        searchInput.value = "";
+        state.query = "";
+        applyFilters();
+      }
+      return;
+    }
+    if (e.key === "/") {
+      const active = document.activeElement;
+      const tag = active && active.tagName;
+      const isTyping = tag === "INPUT" || tag === "TEXTAREA" || (active && active.isContentEditable);
+      if (!isTyping && modalBackdrop.hidden) {
+        e.preventDefault();
+        searchInput.focus();
+      }
+    }
   });
 
   /* Copy-to-clipboard: event delegation, attached once (modalBody
@@ -1070,12 +1279,13 @@
   }
 
   function copyText(text, btn) {
-    const original = btn.textContent;
+    const labelEl = btn.querySelector(".copy-label");
+    const original = labelEl ? labelEl.textContent : btn.textContent;
     const onDone = function () {
-      btn.textContent = "Đã chép!";
+      if (labelEl) labelEl.textContent = "Đã chép!";
       btn.classList.add("copied");
       setTimeout(function () {
-        btn.textContent = original;
+        if (labelEl) labelEl.textContent = original;
         btn.classList.remove("copied");
       }, 1500);
     };
@@ -1125,10 +1335,38 @@
   });
 
   /* ============================================================
+     BACK TO TOP
+     ============================================================ */
+  let backToTopVisible = false;
+  let scrollTicking = false;
+
+  function updateBackToTop() {
+    const shouldShow = window.scrollY > 480;
+    if (shouldShow !== backToTopVisible) {
+      backToTopVisible = shouldShow;
+      backToTopEl.classList.toggle("visible", shouldShow);
+    }
+    scrollTicking = false;
+  }
+
+  window.addEventListener("scroll", function () {
+    if (!scrollTicking) {
+      scrollTicking = true;
+      requestAnimationFrame(updateBackToTop);
+    }
+  }, { passive: true });
+
+  backToTopEl.addEventListener("click", function () {
+    const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: prefersReduced ? "auto" : "smooth" });
+  });
+
+  /* ============================================================
      INIT
      ============================================================ */
   renderHeader();
   renderCategoryChips();
   applyFilters();
+  updateBackToTop();
 })();
 </script>
